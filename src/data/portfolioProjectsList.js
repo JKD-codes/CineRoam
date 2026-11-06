@@ -297,7 +297,7 @@ export const portfolioProjects = [
       "Print Coverage",
       "Social Media Content"
     ],
-    "featured": false
+    "featured": true
   },
   {
     "id": "sports-drive-2",
@@ -637,7 +637,7 @@ export const portfolioProjects = [
       "Shopify E-Commerce Images",
       "Instagram Campaign"
     ],
-    "featured": false
+    "featured": true
   },
   {
     "id": "apparel-drive-2",
@@ -1064,7 +1064,7 @@ export const portfolioProjects = [
     "title": "Commercial Film & Kinetic Pacing",
     "client": "CineRoam Production",
     "category": "cinematography",
-    "coverImage": "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80",
+    "coverImage": "/assets/portfolio/apparel/DSC05626.jpg",
     "instagramUrl": "https://www.instagram.com/reel/DfR4rHLuElS/?exln=ZzB6aGJpMnF5cmtl",
     "embedUrl": "https://www.instagram.com/reel/DfR4rHLuElS/embed/",
     "year": "2026",
@@ -1079,14 +1079,14 @@ export const portfolioProjects = [
       "Sound Design & Rhythm Edits",
       "Color Grading"
     ],
-    "featured": true
+    "featured": false
   },
   {
     "id": "reel-De6z1XUNARb",
     "title": "Artisanal Showcase & Visual Rhythm",
     "client": "CineRoam Production",
     "category": "cinematography",
-    "coverImage": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+    "coverImage": "/assets/portfolio/food/IMG-20251025-WA0018.jpg",
     "instagramUrl": "https://www.instagram.com/reel/De6z1XUNARb/?mdxt=M3cyMmttdWh1NTk4",
     "embedUrl": "https://www.instagram.com/reel/De6z1XUNARb/embed/",
     "year": "2026",
@@ -1101,6 +1101,6 @@ export const portfolioProjects = [
       "Visual Hook Architecture",
       "Engagement Optimization"
     ],
-    "featured": true
+    "featured": false
   }
 ];

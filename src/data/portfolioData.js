@@ -85,8 +85,8 @@ export const colorGradingComparison = {
   description: "Raw footage from cameras looks desaturated and flat. We apply dedicated color correction to bring out rich golden browns in food, appetizing colors, natural skin tones, and deep cinematic contrast that commands attention on mobile screens.",
   beforeLabel: "Flat Raw Capture",
   afterLabel: "CineRoam Color Grade",
-  beforeImage: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=40&sat=-80&con=30",
-  afterImage: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=90",
+  beforeImage: "/assets/food-chocolate-delight.jpeg",
+  afterImage: "/assets/food-chocolate-delight.jpeg",
   highlights: [
     "Warm, appetizing highlights on food & desserts",
     "Rich natural colors without artificial tint",
