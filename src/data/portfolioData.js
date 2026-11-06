@@ -6,10 +6,10 @@ export const personalInfo = {
   location: "India (Available for Shoots)",
   experience: "5+ Years Craft",
   email: "cineroam29@gmail.com",
-  phone: "+91 96081 00000",
-  whatsapp: "919608100000",
-  instagram: "https://instagram.com/cineroam_production",
-  instagramHandle: "@cineroam_production",
+  phone: "+91 99309 02745",
+  whatsapp: "919930902745",
+  instagram: "https://www.instagram.com/chandan_mahato28?psln=b3d0MzlkMHJnMGN6",
+  instagramHandle: "@chandan_mahato28",
   bio: "Creative Director at CineRoam Production. Helping cafes, restaurants, fashion labels, and consumer brands turn casual scrollers into paying customers through viral-worthy reels, high-end food styling, and commercial product imagery."
 };
 

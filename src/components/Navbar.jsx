@@ -168,7 +168,7 @@ export default function Navbar({
             target="_blank"
             rel="noreferrer"
             className="p-2 sm:p-2.5 rounded-full border border-pink-500/30 text-pink-400 hover:bg-pink-500/10 transition-colors bg-white/5 shrink-0"
-            title="Follow on Instagram (@cineroam_production)"
+            title={`Follow on Instagram (${personalInfo.instagramHandle})`}
           >
             <InstagramIcon size={16} />
           </a>
@@ -280,7 +280,7 @@ export default function Navbar({
               className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-xs font-mono tracking-wider text-pink-400 bg-pink-500/10 border border-pink-500/20"
             >
               <InstagramIcon size={16} />
-              <span>Follow @cineroam_production</span>
+              <span>Follow {personalInfo.instagramHandle}</span>
             </a>
           </div>
 

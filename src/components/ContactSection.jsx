@@ -84,6 +84,19 @@ export default function ContactSection({ playShutterSound }) {
                   </div>
                 </div>
 
+                {/* Direct Phone / Call */}
+                <div className="flex items-center gap-3 text-neutral-300">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-[#E8C98A] shrink-0 border border-white/5">
+                    <Phone size={16} />
+                  </div>
+                  <div>
+                    <span className="text-neutral-500 block text-[10px] uppercase">Phone / Calling</span>
+                    <a href={`tel:${personalInfo.phone}`} className="text-white hover:text-[#E8C98A] transition-colors font-medium">
+                      {personalInfo.phone}
+                    </a>
+                  </div>
+                </div>
+
                 {/* Location */}
                 <div className="flex items-center gap-3 text-neutral-300">
                   <div className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-[#E8C98A] shrink-0 border border-white/5">

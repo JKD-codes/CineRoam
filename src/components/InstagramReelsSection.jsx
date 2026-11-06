@@ -84,7 +84,7 @@ export default function InstagramReelsSection({ playShutterSound }) {
               className="inline-flex items-center gap-2 text-xs font-mono text-pink-400 hover:text-pink-300 font-semibold"
             >
               <InstagramIcon size={14} />
-              <span>Visit @cineroam_production on Instagram</span>
+              <span>Visit {personalInfo.instagramHandle} on Instagram</span>
               <ArrowUpRight size={13} />
             </a>
           </div>
