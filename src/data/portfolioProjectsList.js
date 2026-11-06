@@ -1060,42 +1060,46 @@ export const portfolioProjects = [
     "featured": false
   },
   {
-    "id": "cinematic-reel-urban-pulse",
-    "title": "Urban Roam \u2014 4K Cinematic Reel",
-    "client": "CineRoam Originals",
+    "id": "reel-DfR4rHLuElS",
+    "title": "Commercial Film & Kinetic Pacing",
+    "client": "CineRoam Production",
     "category": "cinematography",
     "coverImage": "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80",
+    "instagramUrl": "https://www.instagram.com/reel/DfR4rHLuElS/?exln=ZzB6aGJpMnF5cmtl",
+    "embedUrl": "https://www.instagram.com/reel/DfR4rHLuElS/embed/",
     "year": "2026",
     "role": "Director & DP",
     "camera": "Sony Cinema Line",
     "lens": "24-70mm f/2.8",
-    "specs": "4K 24fps Cinematic",
-    "lighting": "Natural Golden Hour with Soft Fill",
-    "description": "Visual poetry weaving together street vitality, neon reflections, and golden hour silhouettes into an immersive cinematic journey.",
+    "specs": "4K High-Retention Reel",
+    "lighting": "Commercial Atmospheric Studio & On-Location Lighting",
+    "description": "High-retention commercial reel with kinetic cuts, custom sound design, and color grading by Chandan Mahato.",
     "deliverables": [
-      "Brand Anthem Film",
-      "9:16 Social Cutdowns",
-      "Cinematic Stills"
+      "Instagram Viral Reel",
+      "Sound Design & Rhythm Edits",
+      "Color Grading"
     ],
     "featured": true
   },
   {
-    "id": "coffee-alchemy-commercial",
-    "title": "The Golden Pour \u2014 Specialty Coffee Film",
-    "client": "Aura Brew Roasters",
+    "id": "reel-De6z1XUNARb",
+    "title": "Artisanal Showcase & Visual Rhythm",
+    "client": "CineRoam Production",
     "category": "cinematography",
     "coverImage": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+    "instagramUrl": "https://www.instagram.com/reel/De6z1XUNARb/?mdxt=M3cyMmttdWh1NTk4",
+    "embedUrl": "https://www.instagram.com/reel/De6z1XUNARb/embed/",
     "year": "2026",
     "role": "Director of Photography",
     "camera": "Sony Cinema Line",
     "lens": "90mm Macro",
-    "specs": "Slow-Motion Food Reel",
-    "lighting": "Atmospheric warm steam kicker",
-    "description": "Sensory commercial film capturing the micro-foam swirl, extraction drip, and tactile warmth of premium single-origin roasts.",
+    "specs": "Artisanal Visual Rhythm",
+    "lighting": "Warm Textured Accent Lighting",
+    "description": "Sensory visual hook engineered for high watch-time and organic algorithmic reach on Instagram.",
     "deliverables": [
       "Instagram Viral Reel",
-      "Website Video Header",
-      "Menu Display Loop"
+      "Visual Hook Architecture",
+      "Engagement Optimization"
     ],
     "featured": true
   }

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FeaturedGrid from './components/FeaturedGrid';
+import InstagramReelsSection from './components/InstagramReelsSection';
 import AllWorksPage from './components/AllWorksPage';
 import Services from './components/Services';
 import PricingSection from './components/PricingSection';
@@ -119,6 +120,9 @@ export default function App() {
               onExploreAll={() => navigateTo('work')}
               playShutterSound={playShutterSound}
             />
+
+            {/* Featured Live Instagram Reels */}
+            <InstagramReelsSection playShutterSound={playShutterSound} />
 
             {/* Core Commercial Services */}
             <Services playShutterSound={playShutterSound} />

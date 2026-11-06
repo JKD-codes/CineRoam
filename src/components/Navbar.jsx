@@ -112,6 +112,14 @@ export default function Navbar({
           </button>
 
           <button
+            onClick={() => handleNavClick('home', '#reels')}
+            className="text-xs font-mono uppercase tracking-wider text-pink-400 hover:text-pink-300 px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-pink-500/10 flex items-center gap-1.5"
+          >
+            <InstagramIcon size={13} />
+            <span>Reels</span>
+          </button>
+
+          <button
             onClick={() => handleNavClick('work')}
             className={`relative text-xs font-mono uppercase tracking-wider px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center gap-1.5 ${
               currentPage === 'work'
@@ -238,6 +246,14 @@ export default function Navbar({
               className="p-3 rounded-xl text-left border border-white/5 bg-[#141414] text-neutral-300"
             >
               Featured Work
+            </button>
+
+            <button
+              onClick={() => handleNavClick('home', '#reels')}
+              className="p-3 rounded-xl text-left border border-pink-500/20 bg-pink-500/10 text-pink-400 font-semibold flex items-center justify-between"
+            >
+              <span>Instagram Reels</span>
+              <InstagramIcon size={14} />
             </button>
 
             <button

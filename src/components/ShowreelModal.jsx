@@ -1,91 +1,112 @@
 import React, { useState } from 'react';
-import { X, Play, Pause, Volume2, VolumeX, Maximize, Film } from 'lucide-react';
+import { X, Play, ArrowUpRight, Film, Sparkles } from 'lucide-react';
+import { InstagramIcon } from './Navbar';
 
 export default function ShowreelModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
+  const [activeReelIndex, setActiveReelIndex] = useState(0);
+
+  const reels = [
+    {
+      id: "DfR4rHLuElS",
+      title: "Commercial Film & Visual Pacing",
+      url: "https://www.instagram.com/reel/DfR4rHLuElS/?exln=ZzB6aGJpMnF5cmtl",
+      embedUrl: "https://www.instagram.com/reel/DfR4rHLuElS/embed/",
+      tag: "Reel 01"
+    },
+    {
+      id: "De6z1XUNARb",
+      title: "Artisanal Showcase & Cinematic Rhythm",
+      url: "https://www.instagram.com/reel/De6z1XUNARb/?mdxt=M3cyMmttdWh1NTk4",
+      embedUrl: "https://www.instagram.com/reel/De6z1XUNARb/embed/",
+      tag: "Reel 02"
+    }
+  ];
+
+  const activeReel = reels[activeReelIndex];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-2xl animate-in fade-in duration-300">
       
-      {/* Container */}
-      <div className="relative w-full max-w-5xl bg-[#0D0D0D] border border-white/15 rounded-2xl overflow-hidden shadow-2xl">
+      {/* Modal Container */}
+      <div className="relative w-full max-w-4xl bg-[#0D0D0D] border border-white/15 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
         
         {/* Top Header */}
-        <div className="flex items-center justify-between p-4 bg-[#141414] border-b border-white/10 text-white">
+        <div className="flex items-center justify-between p-4 sm:p-5 bg-[#141414] border-b border-white/10 text-white">
           <div className="flex items-center gap-3">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></div>
-            <span className="font-serif font-bold text-sm tracking-wide text-[#E8C98A]">
-              CINEROAM PRODUCTION SHOWREEL · 2026 4K DCI
+            <span className="font-serif font-bold text-base sm:text-lg tracking-wide text-[#E8C98A]">
+              CineRoam <span className="text-white/70 font-sans text-xs">Featured Reels</span>
             </span>
+
+            {/* Reel Tabs */}
+            <div className="flex items-center gap-1.5 ml-2 bg-black/40 p-1 rounded-full border border-white/10">
+              {reels.map((r, idx) => (
+                <button
+                  key={r.id}
+                  onClick={() => setActiveReelIndex(idx)}
+                  className={`px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider transition-colors ${
+                    activeReelIndex === idx
+                      ? 'bg-[#E8C98A] text-black font-semibold'
+                      : 'text-neutral-400 hover:text-white'
+                  }`}
+                >
+                  {r.tag}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-full bg-white/10 hover:bg-red-500 text-white transition-colors"
-            title="Close Showreel (Esc)"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Video Canvas / Aspect Display */}
-        <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
-          
-          {/* Visual video preview background */}
-          <img
-            src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1600&q=80"
-            alt="Showreel Preview"
-            className={`w-full h-full object-cover transition-transform duration-1000 ${
-              isPlaying ? 'scale-105' : 'scale-100'
-            }`}
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
-
-          {/* Letterbox Bars */}
-          <div className="absolute top-0 left-0 right-0 h-6 bg-black/80 pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-6 bg-black/80 pointer-events-none"></div>
-
-          {/* Center Play/Pause button */}
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="relative z-10 w-20 h-20 rounded-full bg-[#E8C98A] text-black flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-          >
-            {isPlaying ? (
-              <Pause size={28} className="fill-black" />
-            ) : (
-              <Play size={28} className="fill-black ml-1" />
-            )}
-          </button>
-
-          {/* Timecode overlay */}
-          <div className="absolute bottom-8 left-6 text-xs font-mono text-white/90 bg-black/60 px-3 py-1 rounded backdrop-blur-sm border border-white/10">
-            00:01:24:18 / 00:02:45:00 · 4K 24FPS PRORES
-          </div>
-
-          {/* Sound & Fullscreen controls */}
-          <div className="absolute bottom-8 right-6 flex items-center gap-2">
-            <button
-              onClick={() => setIsMuted(!isMuted)}
-              className="p-2 rounded bg-black/60 text-white hover:text-[#E8C98A] border border-white/10 backdrop-blur-sm"
+          <div className="flex items-center gap-2">
+            <a
+              href={activeReel.url}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-pink-400 bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 transition-colors"
             >
-              {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              <InstagramIcon size={14} />
+              <span>View on Instagram</span>
+              <ArrowUpRight size={12} />
+            </a>
+
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-white/10 hover:bg-red-500 text-white transition-colors"
+              title="Close (Esc)"
+            >
+              <X size={18} />
             </button>
           </div>
         </div>
 
-        {/* Bottom Details Footer */}
-        <div className="p-4 bg-[#141414] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-400 gap-3">
-          <span>Camera: Sony FX3 Cinema Line · Lenses: G-Master Series · Graded in DaVinci Resolve</span>
+        {/* Video Embed Frame */}
+        <div className="relative w-full bg-black flex items-center justify-center p-3 sm:p-6 overflow-y-auto max-h-[75vh]">
+          <div className="w-full max-w-sm aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl bg-[#111111] border border-white/10">
+            <iframe
+              key={activeReel.id}
+              src={activeReel.embedUrl}
+              title={activeReel.title}
+              className="w-full h-full border-0 rounded-2xl"
+              allowTransparency="true"
+              allow="encrypted-media"
+              scrolling="no"
+              frameBorder="0"
+            />
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="p-4 bg-[#141414] border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-400 gap-3">
+          <span>{activeReel.title} · Directed by Chandan Mahato</span>
+
           <a
-            href="#contact"
-            onClick={onClose}
-            className="text-[#E8C98A] hover:underline"
+            href={activeReel.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-pink-400 hover:text-pink-300 font-semibold flex items-center gap-1"
           >
-            Inquire For Commercial Video Production →
+            <InstagramIcon size={14} />
+            <span>Open in Instagram App ↗</span>
           </a>
         </div>
 
