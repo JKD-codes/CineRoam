@@ -88,7 +88,7 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
               {/* Media Frame */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
                 <img
-                  src={project.thumbnail}
+                  src={project.coverImage || project.thumbnail || project.image}
                   alt={project.title}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
@@ -99,7 +99,7 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
                 {/* Badges on Top */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#E8C98A] border border-[#E8C98A]/30">
-                    {project.categoryLabel}
+                    {project.category || 'Commercial'}
                   </span>
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-black/80 text-white/80 border border-white/10 backdrop-blur-md">
                     {project.lens}
