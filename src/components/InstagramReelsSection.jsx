@@ -1,10 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Play, Sparkles, ArrowUpRight, Flame, Film } from 'lucide-react';
-import { InstagramIcon } from './Navbar';
+import { Play, ArrowUpRight, Flame, Film } from 'lucide-react';
+import { InstagramIcon } from './CustomIcons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function InstagramReelsSection({ playShutterSound }) {
   const [activeTab, setActiveTab] = useState('all');
+  const sectionRef = useRef(null);
+  const reelCardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (reelCardsRef.current.length > 0) {
+        gsap.fromTo(
+          reelCardsRef.current,
+          { opacity: 0, y: 50, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const reels = [
     {
@@ -26,7 +58,7 @@ export default function InstagramReelsSection({ playShutterSound }) {
   ];
 
   return (
-    <section id="reels" className="py-24 bg-[#080808] relative border-t border-white/10">
+    <section ref={sectionRef} id="reels" className="py-24 bg-[#080808] relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -63,6 +95,7 @@ export default function InstagramReelsSection({ playShutterSound }) {
           {reels.map((reel, idx) => (
             <div
               key={reel.id}
+              ref={(el) => (reelCardsRef.current[idx] = el)}
               className="bg-[#121212] border border-white/10 hover:border-[#E8C98A]/40 rounded-3xl p-5 sm:p-6 flex flex-col justify-between space-y-5 transition-all shadow-2xl group"
             >
               

@@ -1,9 +1,57 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Film, Sparkles, Check, ArrowUpRight } from 'lucide-react';
-import { InstagramIcon, WhatsAppIcon } from './Navbar';
+import { Film, Check, ArrowUpRight } from 'lucide-react';
+import { InstagramIcon, WhatsAppIcon } from './CustomIcons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
+  const sectionRef = useRef(null);
+  const emblemRef = useRef(null);
+  const storyRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (emblemRef.current && storyRef.current) {
+        gsap.fromTo(
+          emblemRef.current,
+          { opacity: 0, x: -40, scale: 0.95 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+
+        gsap.fromTo(
+          storyRef.current,
+          { opacity: 0, x: 40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
   const steps = [
     {
       num: "01",
@@ -33,14 +81,14 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-24 bg-[#0A0A0A] relative border-t border-white/10">
+    <section ref={sectionRef} id="about" className="py-24 bg-[#0A0A0A] relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Clean Logo Display + Story */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-20">
           
           {/* Left: CineRoam Emblem (Clean, zero text collision) */}
-          <div className="lg:col-span-5 flex flex-col items-center sm:items-start">
+          <div ref={emblemRef} className="lg:col-span-5 flex flex-col items-center sm:items-start">
             
             <div className="relative w-full max-w-sm sm:max-w-md rounded-3xl p-4 bg-[#141414] border border-[#E8C98A]/30 shadow-2xl space-y-4">
               
@@ -91,9 +139,9 @@ export default function AboutSection() {
           </div>
 
           {/* Right: Story & Creative Manifesto */}
-          <div className="lg:col-span-7 space-y-6 text-center sm:text-left">
+          <div ref={storyRef} className="lg:col-span-7 space-y-6 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-              <Sparkles size={13} />
+              <Film size={13} />
               <span>Behind The Vision</span>
             </div>
 

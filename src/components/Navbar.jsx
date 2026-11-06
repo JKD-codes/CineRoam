@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Menu, X, ArrowUpRight, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Volume2, VolumeX } from 'lucide-react';
+import { WhatsAppIcon, InstagramIcon } from './CustomIcons';
 
-// Official WhatsApp Vector Icon
-export function WhatsAppIcon({ size = 18, className = "" }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.06-1.11-.07-.26-.081-.595-.195-1.026-.381-1.821-.786-3.007-2.639-3.097-2.76-.091-.121-.744-.991-.744-1.89 0-.899.47-1.342.637-1.524.167-.181.365-.226.486-.226.121 0 .243.002.348.007.112.006.262-.042.41.314.152.366.517 1.261.562 1.353.045.091.076.197.015.318-.061.121-.091.196-.182.302-.091.106-.192.237-.274.318-.091.091-.186.19-.08.372.106.182.471.776 1.011 1.258.696.62 1.282.812 1.464.903.182.091.289.076.395-.045.106-.122.456-.531.577-.713.122-.182.244-.152.41-.091.167.061 1.063.501 1.245.592.182.091.304.137.35.213.045.076.045.441-.099.846zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.772.464 3.447 1.277 4.904l-1.316 4.808 4.939-1.295c1.411.768 3.023 1.206 4.733 1.206 5.523 0 10-4.477 10-10 0-5.521-4.477-9.623-10-9.623zm0 18c-1.558 0-3.041-.444-4.307-1.21l-.309-.188-2.923.766.78-2.846-.206-.328c-.843-1.336-1.29-2.883-1.29-4.469 0-4.542 3.695-8.237 8.245-8.237 4.548 0 8.245 3.695 8.245 8.237 0 4.544-3.697 8.275-8.245 8.275z"/>
-    </svg>
-  );
-}
-
-// Instagram Vector Icon
-export function InstagramIcon({ size = 18, className = "" }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-    </svg>
-  );
-}
+export { WhatsAppIcon, InstagramIcon };
 
 export default function Navbar({ 
   currentPage, 

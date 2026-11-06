@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Camera, Sun, Layers, ArrowUpRight } from 'lucide-react';
 import { portfolioProjects, personalInfo } from '../data/portfolioData';
-import { InstagramIcon, WhatsAppIcon } from './Navbar';
+import { InstagramIcon, WhatsAppIcon } from './CustomIcons';
 
 export default function LightboxModal({ project, onClose, onSelectProject, playShutterSound }) {
   if (!project) return null;

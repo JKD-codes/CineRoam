@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { portfolioProjects, categories, personalInfo } from '../data/portfolioData';
-import { ArrowLeft, Search, Eye, Aperture, Filter, MessageCircle, Sparkles } from 'lucide-react';
-import { WhatsAppIcon } from './Navbar';
+import { ArrowLeft, Search, Eye, Aperture, Filter, MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from './CustomIcons';
 import gsap from 'gsap';
 
 export default function AllWorksPage({ onBackHome, onSelectProject, playShutterSound }) {
@@ -60,7 +60,7 @@ export default function AllWorksPage({ onBackHome, onSelectProject, playShutterS
         {/* Page Title & Mission */}
         <div className="max-w-3xl mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-            <Sparkles size={13} />
+            <Aperture size={13} />
             <span>Comprehensive Client Gallery</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-tight">

@@ -1,25 +1,83 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { services, personalInfo } from '../data/portfolioData';
-import { Utensils, Box, Video, Flame, Check, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Check, ArrowUpRight } from 'lucide-react';
+import { FoodIcon, ReelVideoIcon, ProductCosmeticIcon, FashionShutterIcon } from './CustomIcons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const iconMap = {
-  Utensils: Utensils,
-  Box: Box,
-  Video: Video,
-  Flame: Flame
+gsap.registerPlugin(ScrollTrigger);
+
+// Explicit bespoke mapping for each service ID
+const serviceIconMap = {
+  'food-photography': FoodIcon,
+  'social-reels': ReelVideoIcon,
+  'product-commercial': ProductCosmeticIcon,
+  'sports-apparel': FashionShutterIcon
 };
 
 export default function Services({ playShutterSound }) {
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Stagger entrance animation for service cards
+      if (cardsRef.current.length > 0) {
+        gsap.fromTo(
+          cardsRef.current,
+          { opacity: 0, y: 50, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // 3D Parallax Tilt for individual service cards
+  const handleCardMouseMove = (e, cardEl) => {
+    if (!cardEl) return;
+    const rect = cardEl.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    gsap.to(cardEl, {
+      rotateY: x * 0.025,
+      rotateX: -y * 0.025,
+      transformPerspective: 800,
+      ease: "power1.out",
+      duration: 0.4
+    });
+  };
+
+  const handleCardMouseLeave = (cardEl) => {
+    if (!cardEl) return;
+    gsap.to(cardEl, {
+      rotateY: 0,
+      rotateX: 0,
+      ease: "power2.out",
+      duration: 0.6
+    });
+  };
+
   return (
-    <section id="services" className="py-24 bg-[#070707] relative">
+    <section ref={sectionRef} id="services" className="py-24 bg-[#070707] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header (Clean, professional, no jargon, no AI sparkles) */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-            <Sparkles size={13} />
-            <span>Commercial Production Capabilities</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
             Tailored Production Services
           </h2>
@@ -28,15 +86,18 @@ export default function Services({ playShutterSound }) {
           </p>
         </div>
 
-        {/* 4 Pillar Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service) => {
-            const IconComponent = iconMap[service.icon] || Sparkles;
+        {/* 4 Pillar Service Cards with Bespoke Custom Icons & GSAP Tilt */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-[1000px]">
+          {services.map((service, index) => {
+            const IconComponent = serviceIconMap[service.id] || FoodIcon;
 
             return (
               <div
                 key={service.id}
-                className={`relative rounded-2xl p-8 bg-[#111111] border transition-all duration-300 flex flex-col justify-between ${
+                ref={(el) => (cardsRef.current[index] = el)}
+                onMouseMove={(e) => handleCardMouseMove(e, cardsRef.current[index])}
+                onMouseLeave={() => handleCardMouseLeave(cardsRef.current[index])}
+                className={`relative rounded-2xl p-8 bg-[#111111] border transition-all duration-300 flex flex-col justify-between will-change-transform ${
                   service.popular
                     ? 'border-[#E8C98A]/40 shadow-xl shadow-[#E8C98A]/5'
                     : 'border-white/10 hover:border-white/20'
@@ -50,9 +111,9 @@ export default function Services({ playShutterSound }) {
                 )}
 
                 <div className="space-y-4">
-                  {/* Icon */}
-                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center text-[#E8C98A]">
-                    <IconComponent size={22} />
+                  {/* Bespoke Handcrafted Icon */}
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] border border-white/10 flex items-center justify-center text-[#E8C98A] shadow-inner">
+                    <IconComponent size={24} />
                   </div>
 
                   <div>

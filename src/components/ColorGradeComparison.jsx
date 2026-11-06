@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { colorGradingComparison } from '../data/portfolioData';
-import { Sliders, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Sliders, CheckCircle2 } from 'lucide-react';
 
 export default function ColorGradeComparison() {
   const [sliderPosition, setSliderPosition] = useState(50);

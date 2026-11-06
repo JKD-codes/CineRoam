@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
 import { ArrowUp } from 'lucide-react';
-import { InstagramIcon, WhatsAppIcon } from './Navbar';
+import { InstagramIcon, WhatsAppIcon } from './CustomIcons';
 
 export default function Footer({ onNavigate }) {
   const [currentTime, setCurrentTime] = useState('');

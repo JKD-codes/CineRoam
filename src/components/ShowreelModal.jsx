@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Play, ArrowUpRight, Film, Sparkles } from 'lucide-react';
-import { InstagramIcon } from './Navbar';
+import { X, Play, ArrowUpRight, Film } from 'lucide-react';
+import { InstagramIcon } from './CustomIcons';
 
 export default function ShowreelModal({ isOpen, onClose }) {
   if (!isOpen) return null;

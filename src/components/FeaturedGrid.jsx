@@ -1,10 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { portfolioProjects } from '../data/portfolioData';
-import { Camera, Eye, ArrowRight, Sparkles } from 'lucide-react';
+import { Camera, Eye, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutterSound }) {
   // Select top 6 flagship works for the Home Page
   const featuredWorks = portfolioProjects.filter(p => p.featured).slice(0, 6);
+
+  const sectionRef = useRef(null);
+  const gridCardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (gridCardsRef.current.length > 0) {
+        gsap.fromTo(
+          gridCardsRef.current,
+          { opacity: 0, y: 50, scale: 0.94 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleCardClick = (project) => {
     if (playShutterSound) playShutterSound();
@@ -12,7 +45,7 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
   };
 
   return (
-    <section id="featured" className="py-24 relative bg-[#070707] border-t border-white/5">
+    <section ref={sectionRef} id="featured" className="py-24 relative bg-[#070707] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -28,14 +61,14 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <p className="text-neutral-400 font-sans text-sm max-w-sm">
-              A curated snapshot of recent culinary styling, cosmetic packshots, and visual campaigns.
+              Flagship commercial visual productions highlighting texture, product luster, and dynamic pacing.
             </p>
             <button
               onClick={() => {
                 if (playShutterSound) playShutterSound();
                 onExploreAll();
               }}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#E8C98A]/10 hover:bg-[#E8C98A] text-[#E8C98A] hover:text-black border border-[#E8C98A]/40 text-xs font-mono uppercase tracking-wider transition-all duration-200 shrink-0"
+              className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] hover:text-[#F5DEB3] uppercase tracking-wider px-4 py-2 rounded-full border border-[#E8C98A]/30 hover:border-[#E8C98A] hover:bg-[#E8C98A]/10 transition-all shrink-0"
             >
               <span>View All 55+ Works</span>
               <ArrowRight size={13} />
@@ -43,69 +76,63 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
           </div>
         </div>
 
-        {/* 6 Featured Works Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {featuredWorks.map((project) => (
+        {/* 6 Curated Flagship Grid Items with GSAP Stagger Reveal */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredWorks.map((project, index) => (
             <div
               key={project.id}
+              ref={(el) => (gridCardsRef.current[index] = el)}
               onClick={() => handleCardClick(project)}
-              className="group relative rounded-2xl overflow-hidden bg-[#111111] border border-white/10 hover:border-[#E8C98A]/50 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-2xl hover:shadow-[#E8C98A]/10 flex flex-col"
+              className="group cursor-pointer rounded-2xl overflow-hidden bg-[#121212] border border-white/10 hover:border-[#E8C98A]/50 transition-all duration-300 hover:shadow-2xl hover:shadow-[#E8C98A]/10 flex flex-col justify-between"
             >
-              {/* Media Container */}
-              <div className="relative aspect-[4/5] overflow-hidden bg-black/60">
+              {/* Media Frame */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
                 <img
-                  src={project.coverImage}
+                  src={project.thumbnail}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                 />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-80 group-hover:opacity-60 transition-opacity"></div>
 
-                {/* Top Badge */}
+                {/* Badges on Top */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#E8C98A] border border-[#E8C98A]/30">
-                    {project.client}
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#E8C98A] border border-[#E8C98A]/30">
+                    {project.categoryLabel}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-black/80 text-white/80 border border-white/10">
-                    {project.category.toUpperCase()}
-                  </span>
-                </div>
-
-                {/* Inspect Indicator */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <div className="px-4 py-2 rounded-full bg-black/85 backdrop-blur-md border border-[#E8C98A]/50 text-white text-xs font-mono flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <Eye size={14} className="text-[#E8C98A]" />
-                    <span>View Shot Details</span>
-                  </div>
-                </div>
-
-                {/* Bottom Metadata */}
-                <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between text-[11px] font-mono text-neutral-300">
-                  <span className="bg-black/75 px-2.5 py-0.5 rounded backdrop-blur-sm border border-white/10">
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-black/80 text-white/80 border border-white/10 backdrop-blur-md">
                     {project.lens}
                   </span>
-                  <span className="bg-black/75 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10 text-[#E8C98A]">
-                    {project.year}
+                </div>
+
+                {/* Hover Reveal Action Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E8C98A] text-black font-mono text-xs uppercase tracking-wider font-semibold shadow-xl">
+                    <Eye size={13} />
+                    <span>Inspect Details</span>
                   </span>
                 </div>
               </div>
 
-              {/* Information Body */}
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
-                <div>
-                  <h3 className="text-xl font-serif font-bold text-white group-hover:text-[#E8C98A] transition-colors leading-snug">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-sans mt-2 line-clamp-2 leading-relaxed">
-                    {project.description}
-                  </p>
+              {/* Text Info */}
+              <div className="p-5 space-y-2">
+                <div className="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>{project.client}</span>
+                  <span className="text-[#E8C98A]">{project.year}</span>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
-                  {project.deliverables.map((deliv, idx) => (
-                    <span
+                <h3 className="text-lg font-serif font-bold text-white group-hover:text-[#E8C98A] transition-colors leading-snug">
+                  {project.title}
+                </h3>
+
+                <p className="text-xs text-neutral-400 line-clamp-2 font-sans">
+                  {project.description}
+                </p>
+
+                <div className="pt-2 flex flex-wrap gap-1.5 border-t border-white/5">
+                  {project.deliverables?.slice(0, 2).map((deliv, idx) => (
+                    <span 
                       key={idx}
                       className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-300 border border-white/5"
                     >
@@ -123,7 +150,7 @@ export default function FeaturedGrid({ onSelectProject, onExploreAll, playShutte
         <div className="mt-16 rounded-3xl p-8 sm:p-12 bg-gradient-to-r from-[#141414] via-[#1A1A1A] to-[#141414] border border-[#E8C98A]/25 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="space-y-2 max-w-xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-              <Sparkles size={13} />
+              <Camera size={13} />
               <span>Extensive Commercial Library</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">

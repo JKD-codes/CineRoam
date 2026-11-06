@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { personalInfo, faqs } from '../data/portfolioData';
-import { Mail, Phone, MapPin, Send, ChevronDown, CheckCircle2, Sparkles, ArrowUpRight } from 'lucide-react';
-import { WhatsAppIcon, InstagramIcon } from './Navbar';
+import { Mail, Phone, MapPin, Send, ChevronDown, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { WhatsAppIcon, InstagramIcon } from './CustomIcons';
 
 export default function ContactSection({ playShutterSound }) {
   const [formData, setFormData] = useState({
@@ -44,7 +44,7 @@ export default function ContactSection({ playShutterSound }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-            <Sparkles size={13} />
+            <Send size={13} />
             <span>Direct Communication</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
