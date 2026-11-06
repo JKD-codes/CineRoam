@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/assets/logo-cineroam.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Chandan Mahato — Cinematographer, Commercial Photographer & Editor | CineRoam Production</title>
+    <meta name="description" content="Official portfolio of Chandan Mahato (CineRoam Production). High-end cinematography, commercial food & product photography, social media marketing, and precision editing." />
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Chandan Mahato — CineRoam Production" />
+    <meta property="og:description" content="Cinematography, Food & Product Photography, Social Media Marketing & Precision Post-Production." />
+    <meta property="og:image" content="/assets/logo-cineroam.jpeg" />
+    <meta name="theme-color" content="#0A0A0A" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              gold: {
+                DEFAULT: '#E8C98A',
+                light: '#F5DEB3',
+                dark: '#C8A359',
+                accent: '#E6A15C'
+              },
+              cinema: {
+                black: '#070707',
+                dark: '#0E0E0E',
+                surface: '#141414',
+                elevated: '#1C1C1C',
+                border: '#272727',
+                muted: '#8E8E93',
+                light: '#F5F5F0'
+              }
+            },
+            fontFamily: {
+              display: ['"Bricolage Grotesque"', 'sans-serif'],
+              serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+              sans: ['"Schibsted Grotesk"', 'sans-serif']
+            },
+            animation: {
+              'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'spin-slow': 'spin 18s linear infinite',
+              'shimmer': 'shimmer 2.5s infinite linear'
+            },
+            keyframes: {
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#070707] text-[#F5F5F0] font-sans antialiased selection:bg-[#E8C98A] selection:text-black overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
