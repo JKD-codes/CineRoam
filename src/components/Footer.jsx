@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { ArrowUp, Camera, Film, Heart } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { InstagramIcon, WhatsAppIcon } from './Navbar';
 
-export default function Footer() {
+export default function Footer({ onNavigate }) {
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -32,29 +33,58 @@ export default function Footer() {
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           
-          {/* Brand Info */}
+          {/* Brand Info (Clean, properly spaced, no overlapping text) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#E8C98A]/50">
+              <div className="w-11 h-11 rounded-full overflow-hidden border border-[#E8C98A]/50 shrink-0">
                 <img
                   src="/assets/logo-cineroam.jpeg"
                   alt="CineRoam Production Logo"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div>
-                <div className="font-serif text-lg font-bold text-white">
-                  CineRoam <span className="text-[#E8C98A] text-xs font-mono uppercase tracking-widest">Production</span>
+              <div className="flex flex-col">
+                <div className="font-serif text-xl font-bold text-white leading-tight">
+                  CineRoam <span className="text-[#E8C98A] text-xs font-mono uppercase tracking-widest font-normal">Production</span>
                 </div>
                 <div className="text-[11px] font-mono text-neutral-400">
-                  Directed by Chandan Mahato
+                  Chandan Mahato · Creative Director
                 </div>
               </div>
             </div>
 
             <p className="text-xs text-neutral-400 max-w-sm leading-relaxed">
-              Elevating commercial food, cosmetic, and brand narratives through precision 4K cinema capture, artistic chiaroscuro lighting, and DaVinci Resolve color science.
+              Transforming restaurant menus, artisan confectioneries, and modern lifestyle brands through high-impact visual storytelling, commercial photography, and monthly growth retainers.
             </p>
+
+            <div className="flex items-center gap-3 pt-1">
+              <a
+                href={personalInfo.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-xl bg-white/5 hover:bg-pink-500/10 text-pink-400 border border-pink-500/20 transition-colors"
+                title="Instagram"
+              >
+                <InstagramIcon size={16} />
+              </a>
+
+              <a
+                href={`https://wa.me/${personalInfo.whatsapp}`}
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-xl bg-white/5 hover:bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition-colors"
+                title="WhatsApp"
+              >
+                <WhatsAppIcon size={16} />
+              </a>
+
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="text-xs font-mono text-neutral-400 hover:text-[#E8C98A] transition-colors pl-2"
+              >
+                {personalInfo.email}
+              </a>
+            </div>
           </div>
 
           {/* Quick Nav */}
@@ -63,37 +93,70 @@ export default function Footer() {
               <span className="text-white uppercase tracking-wider block text-[11px] font-semibold">
                 Explore
               </span>
-              <ul className="space-y-1.5">
-                <li><a href="#portfolio" className="hover:text-[#E8C98A] transition-colors">Portfolio</a></li>
-                <li><a href="#services" className="hover:text-[#E8C98A] transition-colors">Services</a></li>
-                <li><a href="#color-grade" className="hover:text-[#E8C98A] transition-colors">Color Science</a></li>
-                <li><a href="#gear" className="hover:text-[#E8C98A] transition-colors">Gear Locker</a></li>
+              <ul className="space-y-2">
+                <li>
+                  <button onClick={() => onNavigate('home')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    Home
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('home', '#featured')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    Featured Work
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('work')} className="text-[#E8C98A] hover:underline font-bold text-left flex items-center gap-1">
+                    <span>All Works (55+)</span>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('home', '#services')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    Services
+                  </button>
+                </li>
               </ul>
             </div>
+            
             <div className="space-y-2">
               <span className="text-white uppercase tracking-wider block text-[11px] font-semibold">
-                Connect
+                Engage
               </span>
-              <ul className="space-y-1.5">
-                <li><a href="#estimator" className="hover:text-[#E8C98A] transition-colors">Project Estimator</a></li>
-                <li><a href="#about" className="hover:text-[#E8C98A] transition-colors">About Chandan</a></li>
-                <li><a href="#contact" className="hover:text-[#E8C98A] transition-colors">Book Shoot</a></li>
-                <li><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noreferrer" className="text-emerald-400 hover:underline">WhatsApp</a></li>
+              <ul className="space-y-2">
+                <li>
+                  <button onClick={() => onNavigate('home', '#pricing')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    Pricing Plans
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('home', '#about')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    About Chandan
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => onNavigate('home', '#contact')} className="hover:text-[#E8C98A] transition-colors text-left">
+                    Book a Shoot
+                  </button>
+                </li>
+                <li>
+                  <a href="/Pricing.pdf" download="CineRoam_Pricing.pdf" className="text-neutral-400 hover:text-white transition-colors">
+                    Download Rate Card
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
-          {/* Local Studio Clock */}
-          <div className="md:col-span-3 space-y-3 bg-[#111111] p-4 rounded-xl border border-white/5">
+          {/* Studio Clock & Status */}
+          <div className="md:col-span-3 space-y-3 bg-[#111111] p-5 rounded-2xl border border-white/5">
             <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
-              Studio Local Time (IST)
+              Studio Time (IST)
             </div>
             <div className="text-xl font-mono text-[#E8C98A] font-bold">
-              {currentTime || '09:30:00 PM'}
+              {currentTime || '12:00:00 AM'}
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Available for inquiries</span>
+            <div className="flex items-center gap-2 text-[11px] font-mono text-emerald-400 pt-1 border-t border-white/5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Available for shoots & retainers</span>
             </div>
           </div>
 

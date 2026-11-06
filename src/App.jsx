@@ -1,51 +1,81 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import PortfolioGrid from './components/PortfolioGrid';
-import LightboxModal from './components/LightboxModal';
-import ShowreelModal from './components/ShowreelModal';
-import ColorGradeComparison from './components/ColorGradeComparison';
+import FeaturedGrid from './components/FeaturedGrid';
+import AllWorksPage from './components/AllWorksPage';
 import Services from './components/Services';
-import Estimator from './components/Estimator';
-import GearLocker from './components/GearLocker';
+import PricingSection from './components/PricingSection';
+import ColorGradeComparison from './components/ColorGradeComparison';
 import AboutSection from './components/AboutSection';
 import Testimonials from './components/Testimonials';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import LightboxModal from './components/LightboxModal';
+import ShowreelModal from './components/ShowreelModal';
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'work'
   const [selectedProject, setSelectedProject] = useState(null);
   const [showreelOpen, setShowreelOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  // Synthesize a realistic mechanical camera shutter click sound via Web Audio API
+  // Synchronize hash with page state for clean browser navigation
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === '#/work' || hash === '#work') {
+        setCurrentPage('work');
+      } else if (hash === '#/' || hash === '' || hash === '#home') {
+        setCurrentPage('home');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  const navigateTo = (page, anchor = null) => {
+    setCurrentPage(page);
+    if (page === 'work') {
+      window.location.hash = '/work';
+    } else {
+      window.location.hash = '/';
+      if (anchor) {
+        setTimeout(() => {
+          const el = document.querySelector(anchor);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      }
+    }
+  };
+
+  // Web Audio API Mechanical Shutter Sound FX
   const playShutterSound = useCallback(() => {
     if (!soundEnabled) return;
     try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const ctx = new AudioContext();
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
 
-      // Shutter click transient (quick noise burst)
-      const bufferSize = ctx.sampleRate * 0.05; // 50ms
+      // Shutter click transient
+      const bufferSize = ctx.sampleRate * 0.045; // 45ms
       const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.008));
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.007));
       }
 
       const noise = ctx.createBufferSource();
       noise.buffer = buffer;
 
-      // Filter to simulate mechanical shutter body
       const filter = ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1400, ctx.currentTime);
-      filter.Q.setValueAtTime(3.0, ctx.currentTime);
+      filter.frequency.setValueAtTime(1600, ctx.currentTime);
+      filter.Q.setValueAtTime(3.2, ctx.currentTime);
 
       const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.25, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.005, ctx.currentTime + 0.04);
 
       noise.connect(filter);
       filter.connect(gain);
@@ -53,52 +83,73 @@ export default function App() {
 
       noise.start();
     } catch (e) {
-      // AudioContext could be blocked by autoplay policies until user clicks
+      // AudioContext policy
     }
   }, [soundEnabled]);
 
   return (
     <div className="min-h-screen bg-[#070707] text-[#F5F5F0] relative selection:bg-[#E8C98A] selection:text-black">
       
-      {/* Subtle Film Grain Noise Texture */}
+      {/* Film Grain Texture */}
       <div className="fixed inset-0 film-grain pointer-events-none z-40 opacity-70"></div>
 
-      {/* Navigation */}
+      {/* Primary Floating Navigation Bar */}
       <Navbar
+        currentPage={currentPage}
+        setCurrentPage={navigateTo}
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
         playShutterSound={playShutterSound}
       />
 
-      {/* Main Content Sections */}
+      {/* Multi-Page Views */}
       <main>
-        <Hero
-          onOpenShowreel={() => setShowreelOpen(true)}
-          playShutterSound={playShutterSound}
-        />
+        {currentPage === 'home' ? (
+          <>
+            {/* Cinematic Hero */}
+            <Hero
+              onOpenShowreel={() => setShowreelOpen(true)}
+              onExploreWorks={() => navigateTo('work')}
+              playShutterSound={playShutterSound}
+            />
 
-        <PortfolioGrid
-          onSelectProject={(project) => setSelectedProject(project)}
-          playShutterSound={playShutterSound}
-        />
+            {/* Curated Highlights Grid (6 Flagship Works) */}
+            <FeaturedGrid
+              onSelectProject={(project) => setSelectedProject(project)}
+              onExploreAll={() => navigateTo('work')}
+              playShutterSound={playShutterSound}
+            />
 
-        <ColorGradeComparison />
+            {/* Core Commercial Services */}
+            <Services playShutterSound={playShutterSound} />
 
-        <Services playShutterSound={playShutterSound} />
+            {/* Official Pricing Retainer Plans (From Pricing.pdf) */}
+            <PricingSection playShutterSound={playShutterSound} />
 
-        <Estimator playShutterSound={playShutterSound} />
+            {/* Color Finishing Slider */}
+            <ColorGradeComparison />
 
-        <GearLocker />
+            {/* Director & DP Story (Fixed clean typography) */}
+            <AboutSection />
 
-        <AboutSection />
+            {/* Client Reviews */}
+            <Testimonials />
 
-        <Testimonials />
-
-        <ContactSection playShutterSound={playShutterSound} />
+            {/* Direct Booking & Instagram Connect */}
+            <ContactSection playShutterSound={playShutterSound} />
+          </>
+        ) : (
+          /* Dedicated All Works Archive Page (55+ Works with category filters & search) */
+          <AllWorksPage
+            onBackHome={() => navigateTo('home')}
+            onSelectProject={(project) => setSelectedProject(project)}
+            playShutterSound={playShutterSound}
+          />
+        )}
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Global Footer */}
+      <Footer onNavigate={navigateTo} />
 
       {/* Interactive Lightbox Inspector Modal */}
       {selectedProject && (
@@ -110,7 +161,7 @@ export default function App() {
         />
       )}
 
-      {/* Showreel Cinema Player Modal */}
+      {/* Cinema Showreel Modal */}
       <ShowreelModal
         isOpen={showreelOpen}
         onClose={() => setShowreelOpen(false)}

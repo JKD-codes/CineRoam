@@ -1,33 +1,34 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Film, Award, Heart, Sparkles, Check, ArrowUpRight } from 'lucide-react';
+import { Film, Sparkles, Check, ArrowUpRight } from 'lucide-react';
+import { InstagramIcon, WhatsAppIcon } from './Navbar';
 
 export default function AboutSection() {
   const steps = [
     {
       num: "01",
-      title: "Moodboard & Visual Strategy",
-      desc: "We dissect your brand identity, product ingredients, and customer demographics to build a bespoke lighting and color palette treatment."
+      title: "Visual Strategy & Moodboard",
+      desc: "Dissecting your brand aesthetic, audience desires, and hero offerings to plan high-impact visual angles and lighting styles."
     },
     {
       num: "02",
       title: "Art Staging & Food Styling",
-      desc: "Selecting authentic surfaces, raw textures, crystal accents, and macro food props that frame the hero product with tactile depth."
+      desc: "Carefully arranging authentic textures, ceramics, raw spices, and garnishes to make dishes look irresistible on camera."
     },
     {
       num: "03",
-      title: "Micro-Lighting & 4K Cinema Capture",
-      desc: "Employing dual-native ISO cinema sensors, high-CRI continuous lights, and specialized macro glass to capture details imperceptible to the naked eye."
+      title: "High-Definition Capture",
+      desc: "Recording high-resolution video and macro stills with dedicated continuous lighting for vibrant, authentic color reproduction."
     },
     {
       num: "04",
-      title: "DaVinci Color Science & Sound Design",
-      desc: "Custom Kodak 2383 film transforms, balanced highlights, and bespoke Foley sound effects that give motion pieces visceral weight."
+      title: "Paced Editing & Color Grading",
+      desc: "Crafting rhythmic cuts, viral hooks, appetizing golden hues, and clean sound effects designed for high watch-time."
     },
     {
       num: "05",
-      title: "Multi-Format Export & Launch",
-      desc: "Delivery in pristine high-bitrate master formats optimized for billboards, Amazon A+ pages, and 9:16 vertical social feeds."
+      title: "Social Scheduling & Community",
+      desc: "Delivering ready-to-post vertical reels, carousel sets, and managing follower interactions to grow local customer footfall."
     }
   ];
 
@@ -35,73 +36,89 @@ export default function AboutSection() {
     <section id="about" className="py-24 bg-[#0A0A0A] relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Grid: Story + Image */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
+        {/* Main Grid: Clean Logo Display + Story */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-20">
           
-          {/* Left: CineRoam Emblem & Portrait Frame */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden bg-[#141414] border border-[#E8C98A]/30 p-2 shadow-2xl">
-              <div className="relative aspect-square rounded-xl overflow-hidden bg-black flex items-center justify-center">
+          {/* Left: CineRoam Emblem (Clean, zero text collision) */}
+          <div className="lg:col-span-5 flex flex-col items-center sm:items-start">
+            
+            <div className="relative w-full max-w-sm sm:max-w-md rounded-3xl p-4 bg-[#141414] border border-[#E8C98A]/30 shadow-2xl space-y-4">
+              
+              {/* Logo Emblem: Displayed clean without any overlapping text */}
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner flex items-center justify-center">
                 <img
                   src="/assets/logo-cineroam.jpeg"
-                  alt="CineRoam Production Emblem"
-                  className="w-full h-full object-cover"
+                  alt="CineRoam Production Logo"
+                  className="w-full h-full object-contain p-2"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-6 left-6 right-6 text-center space-y-1">
-                  <span className="text-xs font-mono text-[#E8C98A] uppercase tracking-widest block">
-                    CineRoam Production
-                  </span>
-                  <h3 className="text-xl font-serif font-bold text-white">
-                    Directed by Chandan Mahato
-                  </h3>
-                  <p className="text-[11px] font-mono text-neutral-400">
-                    Social Media Marketing & Cinematic Storytelling
-                  </p>
+              </div>
+
+              {/* Clean Identification Card Below the Logo */}
+              <div className="p-4 bg-[#1C1C1C] rounded-xl border border-white/5 space-y-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-white leading-tight">
+                      Chandan Mahato
+                    </h3>
+                    <p className="text-xs font-mono text-[#E8C98A]">
+                      Director & DP · CineRoam Production
+                    </p>
+                  </div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" title="Active for Collaborations"></div>
+                </div>
+
+                <p className="text-[11px] font-mono text-neutral-400 border-t border-white/10 pt-2">
+                  Commercial Cinematography, Food Styling & Brand Social Management
+                </p>
+
+                {/* Direct Social Link */}
+                <div className="pt-1 flex items-center gap-2">
+                  <a
+                    href={personalInfo.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-pink-400 hover:text-pink-300 transition-colors"
+                  >
+                    <InstagramIcon size={14} />
+                    <span>{personalInfo.instagramHandle}</span>
+                    <ArrowUpRight size={12} />
+                  </a>
                 </div>
               </div>
+
             </div>
 
-            {/* Floating Experience Badge */}
-            <div className="absolute -bottom-6 -right-6 bg-[#161616] border border-white/10 p-4 rounded-xl shadow-2xl hidden sm:block">
-              <div className="text-2xl font-display font-bold text-[#E8C98A]">
-                {personalInfo.experience}
-              </div>
-              <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
-                Production Craft
-              </div>
-            </div>
           </div>
 
-          {/* Right: Bio & Philosophy */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Right: Story & Creative Manifesto */}
+          <div className="lg:col-span-7 space-y-6 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-              <Film size={13} />
+              <Sparkles size={13} />
               <span>Behind The Vision</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight leading-tight">
-              We Don't Just Record Light. <br />
-              <span className="italic text-gold-gradient font-normal">We Evoke Appetite & Desire.</span>
+              We Don't Just Shoot Videos. <br />
+              <span className="italic text-gold-gradient font-normal">We Build Brands Customers Crave.</span>
             </h2>
 
             <div className="space-y-4 text-neutral-300 font-sans text-base leading-relaxed">
               <p>
-                Founded by cinematographer and commercial photographer <strong className="text-white font-semibold">Chandan Mahato</strong>, <strong>CineRoam Production</strong> was created to bridge the divide between artistic cinema-grade visual storytelling and performance-driven commercial marketing.
+                Founded by visual artist <strong className="text-white font-semibold">Chandan Mahato</strong>, <strong>CineRoam Production</strong> was built with a single mission: to provide cafes, restaurants, fashion labels, and modern brands with cinematic visual storytelling that turns casual scrollers into loyal customers.
               </p>
               <p>
-                In today's fast-scrolling feed, a product has less than 1.5 seconds to hook a viewer. Whether it's the golden sheen of caramelized jaggery over artisan sweets, the pristine droplet refraction on a skincare tube like Mesaura, or the kinetic rhythm of a brand commercial, our productions are engineered to stop thumbs and kindle desire.
+                In today's fast-moving social feeds, you have less than 2 seconds to capture attention. Whether it's the warm golden sizzle of fresh culinary creations, the clean luxury lines of cosmetic bottles like Mesaura, or high-energy streetwear lookbooks, every frame is crafted to look premium, authentic, and thumb-stopping.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-              <div className="space-y-1">
-                <span className="text-xs font-mono text-[#E8C98A] uppercase">Production Ethics</span>
-                <p className="text-xs text-neutral-400">Authentic food styling, zero shortcuts, true-to-life color reproduction.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/10 text-left">
+              <div className="space-y-1 bg-[#141414] p-4 rounded-xl border border-white/5">
+                <span className="text-xs font-mono text-[#E8C98A] uppercase font-semibold">Reliable Delivery</span>
+                <p className="text-xs text-neutral-400 font-sans">Consistent monthly shoot schedules so your social presence never runs dry.</p>
               </div>
-              <div className="space-y-1">
-                <span className="text-xs font-mono text-[#E8C98A] uppercase">Turnaround Guarantee</span>
-                <p className="text-xs text-neutral-400">Punctual milestones, responsive revisions, broadcast-ready deliverables.</p>
+              <div className="space-y-1 bg-[#141414] p-4 rounded-xl border border-white/5">
+                <span className="text-xs font-mono text-[#E8C98A] uppercase font-semibold">Tailored Aesthetics</span>
+                <p className="text-xs text-neutral-400 font-sans">Custom color palettes and visual pacing aligned directly with your brand identity.</p>
               </div>
             </div>
           </div>
@@ -112,25 +129,27 @@ export default function AboutSection() {
         <div className="space-y-8 pt-8 border-t border-white/10">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-mono text-[#E8C98A] uppercase tracking-wider">
-              The CineRoam Pipeline
+              The CineRoam Method
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-              From Concept to Master Delivery
+              From Planning to Viral Publish
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="bg-[#121212] border border-white/10 rounded-xl p-5 space-y-3 relative group hover:border-[#E8C98A]/40 transition-colors"
+                className="bg-[#121212] border border-white/10 rounded-2xl p-5 space-y-3 relative group hover:border-[#E8C98A]/40 transition-colors flex flex-col justify-between"
               >
-                <div className="text-2xl font-mono font-bold text-[#E8C98A]/60 group-hover:text-[#E8C98A] transition-colors">
-                  {step.num}
+                <div>
+                  <div className="text-2xl font-mono font-bold text-[#E8C98A]/60 group-hover:text-[#E8C98A] transition-colors">
+                    {step.num}
+                  </div>
+                  <h4 className="font-serif font-bold text-white text-base leading-tight mt-2">
+                    {step.title}
+                  </h4>
                 </div>
-                <h4 className="font-serif font-bold text-white text-base leading-tight">
-                  {step.title}
-                </h4>
                 <p className="text-xs text-neutral-400 font-sans leading-relaxed">
                   {step.desc}
                 </p>
