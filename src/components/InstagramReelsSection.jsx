@@ -146,16 +146,9 @@ export default function InstagramReelsSection({ playShutterSound }) {
                   <span className="text-[11px] font-mono text-neutral-500">
                     Directed by Chandan Mahato
                   </span>
-
-                  <a
-                    href={reel.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-mono text-[#E8C98A] hover:underline"
-                  >
-                    <span>Open in Instagram App</span>
-                    <ArrowUpRight size={12} />
-                  </a>
+                  <span className="text-[11px] font-mono text-[#E8C98A]">
+                    Commercial Reel
+                  </span>
                 </div>
               </div>
 

@@ -58,17 +58,6 @@ export default function ShowreelModal({ isOpen, onClose }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href={activeReel.url}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-pink-400 bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/20 transition-colors"
-            >
-              <InstagramIcon size={14} />
-              <span>View on Instagram</span>
-              <ArrowUpRight size={12} />
-            </a>
-
             <button
               onClick={onClose}
               className="p-2 rounded-full bg-white/10 hover:bg-red-500 text-white transition-colors"
@@ -103,10 +92,10 @@ export default function ShowreelModal({ isOpen, onClose }) {
             href={activeReel.url}
             target="_blank"
             rel="noreferrer"
-            className="text-pink-400 hover:text-pink-300 font-semibold flex items-center gap-1"
+            className="text-pink-400 hover:text-pink-300 font-semibold flex items-center gap-1.5"
           >
             <InstagramIcon size={14} />
-            <span>Open in Instagram App ↗</span>
+            <span>View on Instagram ↗</span>
           </a>
         </div>
 
